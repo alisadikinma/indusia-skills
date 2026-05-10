@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "indusia-skills",
+  "description": "Indonesian B2B domain expert skills — logistik, fleet engineering, finance, creative direction. Built by PT INDUSIA Kecerdasan Digital for AI-powered project work in Indonesia.",
+  "owner": {
+    "name": "Ali Sadikin",
+    "url": "https://github.com/alisadikinma"
+  },
+  "plugins": [
+    {
+      "name": "indusia-skills",
+      "description": "4 domain expert skills for Indonesian B2B AI projects: container trucking & crane logistics (Batam), fleet tech architecture (phone-as-GPS + ESP32 BLE + UHF RFID), Indonesian tax/finance, and creative video direction for B2B promo.",
+      "version": "0.1.0",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/alisadikinma/indusia-skills.git"
+      }
+    }
+  ]
+}

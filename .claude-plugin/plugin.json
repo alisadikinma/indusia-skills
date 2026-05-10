@@ -1,0 +1,28 @@
+{
+  "name": "indusia-skills",
+  "description": "Indonesian B2B domain expert skills — logistik Batam, smart fleet architecture, finance, creative direction. Reusable across PT INDUSIA Kecerdasan Digital client projects.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ali Sadikin",
+    "url": "https://github.com/alisadikinma"
+  },
+  "homepage": "https://github.com/alisadikinma/indusia-skills",
+  "repository": "https://github.com/alisadikinma/indusia-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "skills",
+    "indonesia",
+    "b2b",
+    "logistik",
+    "trucking",
+    "fleet-management",
+    "iot",
+    "esp32",
+    "anti-fraud",
+    "akuntansi-indonesia",
+    "creative-direction",
+    "video-promo",
+    "batam"
+  ]
+}
