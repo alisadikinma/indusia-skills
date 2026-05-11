@@ -15,26 +15,53 @@ Setiap skill = domain expert atau tech architect yang bisa dipanggil via `/<skil
 
 ## Tandem Architecture
 
+Setiap skill **bisa invoke standalone** untuk konsultasi langsung, ATAU **chained via `creative-video-director`** kalau output-nya untuk content/campaign work.
+
+### Pattern 1 — Direct Invocation (Konsultasi Domain)
+
 ```
-       USER (founder/PM/marketer)
-                │
-                ▼
+   USER
+    │
+    ├──▶ /pakar-logistik-batam        ← domain question (pain, archetype, ops advisory)
+    ├──▶ /smart-fleet-architect       ← tech question (schema, hardware, integration)
+    └──▶ /akuntan-indonesia-pro       ← finance question (pajak, ROI, closing)
+```
+
+### Pattern 2 — Orchestrated (Content & Campaign)
+
+```
+   USER
+    │
+    ▼
    ┌────────────────────────────┐
-   │  creative-video-director   │  ← orchestrator
+   │  creative-video-director   │  ← orchestrator (strategic brief layer)
    │  (content & campaign work) │
    └─┬──────────┬──────────┬────┘
-     │          │          │
+     │ consults │ consults │ consults
      ▼          ▼          ▼
  pakar-     smart-     akuntan-
  logistik-  fleet-     indonesia-
  batam      architect  pro
- (DOMAIN)   (TECH)     (FINANCE)
+ (DOMAIN)   (TECH)     (FINANCE — pitch deck only)
+     │
+     │ outputs creative brief, then routes to downstream production plugins:
+     ▼
+ ┌───────────────────────────────────────────────────────────────────┐
+ │  ai-video-promo-engine  →  video-brainstorm → script → image → gen │
+ │  ai-image-carousel-prompt-gen  →  carousel-gen                      │
+ │  linkedin-post-writer   →  linkedin-gen                             │
+ │  pitch-deck-designer    →  pitch-deck-brief → storyline → gen       │
+ │  article-content-writer →  article-gen                              │
+ └───────────────────────────────────────────────────────────────────┘
 ```
 
-- `pakar-logistik-batam` mendefinisikan **pain bisnis** + archetype customer
+**Roles:**
+- `pakar-logistik-batam` mendefinisikan **pain bisnis** + archetype customer + quotable hooks
 - `smart-fleet-architect` mendefinisikan **mekanisme teknis** (high-level untuk video, deep untuk dev)
-- `akuntan-indonesia-pro` mendefinisikan **ROI / CapEx / tax treatment** (untuk pitch deck only)
-- `creative-video-director` orkestrasi semua → output brief multi-format
+- `akuntan-indonesia-pro` mendefinisikan **ROI / CapEx / tax treatment** (untuk pitch deck only — JANGAN masuk video promo publik)
+- `creative-video-director` orkestrasi 3 specialist di atas → output brief multi-format → route ke production plugin yang fit
+
+**Catatan:** Downstream production plugins (`ai-video-promo-engine`, `linkedin-post-writer`, dll.) **tidak dibundle di repo ini** — install terpisah. Repo ini fokus ke 4 strategic/domain skill yang generic untuk B2B Indonesia.
 
 ## Install
 
