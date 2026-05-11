@@ -295,3 +295,58 @@ Kalau >2 ❌ → kembalikan ke creator untuk revisi.
 - Hook customization per pain → `03-hook-customization-irn.md`
 - Format-specific application → `04-video-format-decision.md` + `05-cross-format-orchestration.md`
 - Auto-veto list → `06-creative-vetos.md`
+- Tionghoa Batam overlay (Phase D, LOCK-4) → `07-tionghoa-batam-overlay.md` (NEW)
+- **5-beat narrative scaffold canonical** (Phase F, WS6) → `08-narrative-retention-framework.md` (NEW — CTA register × beat placement)
+
+---
+
+## Addendum (Day R3, 2026-05-11) — Register Calibration + 2-Layer Cultural Model
+
+> **Anchor — Speaker (`{{agency_company}}`, AI+IoT+Mobile Solution agency) vs Subject (client owner archetype).** Brand voice MUST address both: owner layer + workforce layer (2-layer cultural model). Project binds specific archetype overlay (e.g., Tionghoa Batam owner via `07-tionghoa-batam-overlay.md`).
+
+### Register Table (WS1-REDO Indonesian low-arousal default)
+
+| Layer | Register | Examples |
+|---|---|---|
+| **Owner (Tionghoa Batam archetype) — direct address via `{{owner_honorific}}`** | Calm, data-specific, practical, ROI-numerate, brief | *"`{{owner_honorific}}`, Anda hemat Rp X per bulan kalau solar leak Anda di-detect."* (NOT *"Transformasi digital fleet Anda!"*) |
+| **Karyawan (Indonesian general) — sopir / admin / mekanik addressed** | Warm, face-saving, voice-note friendly, multi-ethnic safe | *"Konfirmasi pengisian solar tadi pagi ya, Pak Rohim."* (NOT *"Anda mencuri solar"*) |
+| **Customer-facing (mixed)** | Professional + Batam-specific terminology accepted | *"Container Anda sudah sampai di Mukakuning, ETA Batamindo 15 menit."* |
+| **VO casting (Speaker = INDUSIA)** | Neutral Indonesian, Batam-aware, NOT Jakarta-corporate, NOT Melayu-thick | Mid-tone male/female, conviction over enthusiasm |
+
+### Honorific Asymmetry Rule (LOCK-5)
+
+| Direction | Default Honorific | Why |
+|---|---|---|
+| Asisten / app / video VO → Pak Indra (owner) | **"Pak Tan" / "Cik" / "Koh"** (Hokkien-respectful, age-dependent) | Tionghoa Batam default (NOT "Pak Haji") |
+| Pak Indra → sopir (downward, but respectful) | **"Pak Sopir Rohim"** atau **"Mas Hamdani"** | Preserve sopir dignity, multi-ethnic safe |
+| Asisten → sopir (clarification mode) | **"Pak Rohim"** + face-saving framing | Anti-fraud-with-dignity workflow |
+| Customer-facing VO → owner mentioned | `{{owner_honorific}}` atau **"Bapak"** generic | Default safe |
+
+**Validation:** Persona answers may override default honorific (e.g., user confirms Pak Indra prefer "Pak Indra" over "Pak Tan"). Re-Edit `project_pak_indra_archetype.md` if so.
+
+### Dual-Calendar Content Rule (LOCK-5)
+
+| Layer | Calendar Awareness |
+|---|---|
+| Owner (Tionghoa) | **Imlek + Cap Go Meh + Qingming + Vesak** — content / promo align dengan calendar ini |
+| Karyawan (Indonesian) | **Eid + Ramadhan + Christmas** — operations + recruitment + motivation video align |
+| Cross-friction | Dual-holiday awareness — operations gap during Imlek (owner libur) + Eid (sopir libur) = no overlap, both must be planned |
+
+### Anti-Fraud Framing Tension (LOCK-5 cross-layer)
+
+Tionghoa owner direct on fraud detection ↔ Indonesian sopir face-saving. Brand voice rule:
+
+| Output | Tone |
+|---|---|
+| Owner dashboard alert | Direct, data-specific: *"Anomali: B-5678 fuel gap 15L jam 9:15 di SPBU Mukakuning. Saya tahan invoice fuel B-5678?"* |
+| Sopir-facing WhatsApp clarification | Face-saving, clarification framing: *"Pak Rohim, ada catatan pengisian solar tadi pagi. Bisa konfirmasi ya?"* |
+| Public-facing video promo | Show owner-gets-data + sopir-gets-dignity simultaneously — NEVER frame sopir publicly as thief |
+| Recruitment video | Frame anti-fraud as **fairness for honest sopir** — fraud detection protects honest sopir from being blamed |
+
+### Speaker (Agency) Voice — AI + IoT + Mobile Solution
+
+`{{agency_company}}` narrator/host voice = neutral Indonesian, regionally-aware (e.g., Batam-aware for Batam-logistik clients), register calibrated to `{{owner_register}}`. Triangulation rule:
+
+- Every claim MUST link to 1 of 3 pillars: *"AI deteksi anomali (Pillar 1)"*, *"IoT sensor [domain] (Pillar 2)"*, *"Mobile dashboard di HP Bapak (Pillar 3)"*
+- Differentiator phrasing: *"Bukan corporate big-data kayak [incumbent unnamed]. Tapi dashboard yang owner langsung pakai dari HP."* (avoid naming `{{competitor_incumbent}}` publicly)
+- Anti-fluff: NEVER use "transformasi digital" / "revolusi industri 4.0" / "next-gen" / "AI-powered" jargon. Replace with concrete output ("Bapak tahu solar Anda menguap 15 liter, AI-nya yang detect.").

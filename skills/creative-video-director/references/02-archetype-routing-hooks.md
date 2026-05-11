@@ -281,3 +281,66 @@ ARCHETYPE → AWARENESS LEVEL → HOOK TYPE → TONE → FORMAT
 - Hook customization per IRN pain → `03-system-explanation-craft.md` (saat butuh frame solusi mekanisme)
 - Format decision per archetype → `04-video-format-decision.md`
 - Brand voice rules per archetype → `01-brand-voice-doctrine.md` Section 8 (VO casting)
+- Tionghoa Batam owner overlay (Phase D, LOCK-4) → `07-tionghoa-batam-overlay.md` (NEW)
+- **5-beat narrative scaffold canonical** (Phase F, WS6) → `08-narrative-retention-framework.md` (NEW — Hook beat operational rules + curiosity-gap mechanism)
+
+---
+
+## Addendum (Day R3, 2026-05-11) — WS1-REDO Video Psychology + Owner Visibility Gap Hook Patterns
+
+> **Anchor — All 7 Owner Visibility Gaps as hook material:** Setiap hook WAJIB anchor di "tahu" vs "tidak tahu" tension. Format: *"Anda tahu [specific data] tadi pagi?"* — direct address owner, specific data, owner-pov. JANGAN industry-pain "ada masalah X" framing.
+
+### Quantified Hook Timing (WS1-REDO findings)
+
+| Window | Rule | Source |
+|---|---|---|
+| **0-3 seconds** | Visual + audio + curiosity-gap delivered BEFORE 3 sec mark | WS1 REDO: 3-second rule TikTok/IG algorithmic |
+| **0-30 seconds** | Algorithmic cliff — if engagement <X%, video buried | WS1: 30-sec retention as primary algorithm signal |
+| **3-7 seconds** | Foreshadow setup — promise of payoff later | WS1: dopamine on anticipation, not on reward |
+| **70-85% runtime** | Peak placement | WS6 narrative framework (5-beat) |
+| **CTA last 10-15%** | Soft for B2B (consult / DM / WA), hard for B2C | WS1 + WS6 |
+
+### Indonesian Low-Arousal Register (WS1-REDO)
+
+Indonesian audience attention pattern ≠ Western high-arousal hook. Default register:
+- **Calm + matter-of-fact** delivery beats shouty hook
+- **Data-specific** beats vague hyperbole ("23 truk Anda" beats "fleet besar")
+- **Direct address owner** ("Bapak / Anda") beats third-person ("para pengusaha")
+- **Quiet conviction** beats high-energy salesman
+- **Local accent / lokal idiom** preserves authenticity (NOT corporate-sterile Bahasa baku)
+
+### Owner Visibility Gap Curiosity-Gap Hook Library (canonical for IRN + reusable)
+
+Pattern: *"Anda tahu [specific gap data] tadi [time anchor]?"* — opens curiosity gap (Loewenstein) at owner-pov.
+
+| Gap # | Hook Pattern Example |
+|---|---|
+| 1 (kondisi lapangan) | *"Pak, Anda tahu sekarang jam 14:30, truk Anda yang B-1234 lagi di mana? Sopir Rohim mungkin... di customer? Antri di gate? Atau lagi makan siang ke-3 kalinya hari ini?"* |
+| 2 (ETA driver) | *"Anda quote customer 'sampai jam 4'. Sopir Anda berangkat jam 11. Anda tahu — APA YANG SEHARUSNYA jadi ETA-nya? Atau Anda nebak-nebak aja seperti customer Anda?"* |
+| 3 (solar) | *"50 liter masuk SPBU jam 9:15. Tank Anda cuma naik 35 liter. Anda tahu 15 liter sisanya ke mana? Atau Anda gak tau ada yang missing?"* |
+| 4 (attendance) | *"Karyawan Anda kemarin masuk jam berapa? Pulang jam berapa? Bukan menurut absensi paper. Menurut RFID gate. Anda tahu bedanya?"* |
+| 5 (container jalan) | *"Container EISU456789 yang Anda kontrak ke customer Batamindo — sekarang dia di Trans Batam, di pelabuhan, atau di rumah sopir? Anda tahu jawabannya?"* |
+| 6 (chassis) | *"90 chassis Anda. 10 menit yang lalu, di mana mereka semua? Pak Indra... Anda tahu, atau Anda 'kira-kira' aja?"* |
+| 7 (container gudang) | *"Gudang Anda 200 slot. Container Anda 47. Coba tunjuk peta — slot mana yang B5C3, yang harus keluar besok pagi? Anda tahu... atau cari dulu 20 menit?"* |
+
+**Apply rule:** Setiap video promo / carousel / pitch deck hook WAJIB pakai 1 dari 7 pattern di atas (atau adapt). Triangulate ke 3-pillar di body video (AI/IoT/Mobile yang solve specific gap).
+
+### Foreshadow Pattern (WS1 + WS6 input)
+
+Dopamine triggers pada **anticipation** of resolution, not on resolution itself. Body of video harus drip-feed Asisten/dashboard reveal:
+- Sec 5-10: pertanyaan/pain hook (owner gap)
+- Sec 10-25: hint solusi ada ("Pak Indra punya cara baru lihat ini...")
+- Sec 25-40: Asisten on-screen, sample interaction (WhatsApp screen rendering)
+- Sec 40-60: payoff moment — Pak Indra ngomong "Saya bisa lihat semua dari HP saya"
+
+### Narrative Transportation (WS1)
+
+Story-driven video bypasses ELM (Elaboration Likelihood Model) — viewer suspend disbelief, no counter-arguing. **Default for Pak Indra archetype owner promo = story-driven (owner di kantor / kopitiam, HP getar, Asisten kasih tahu)**, NOT data-driven (chart bar showing fleet utilization). Data-driven cadangan untuk pitch deck B2B procurement audience.
+
+### Awareness-Level Pillar Routing (WS9 differentiator)
+
+Tionghoa Batam owner = **practical-skeptic** awareness level (between "problem-aware" dan "solution-aware"). Hook strategy:
+- DO: Quantify cost of NOT knowing ("Rp 5-15jt/bulan leak solar")
+- DO: Show comparable competitor implementing (Eddi has TMS, IRN need owner-pov differentiation)
+- DON'T: Abstract "digital transformation" (gets dismissed)
+- DON'T: Spiritual/aspirational framing (Tionghoa register practical, not transcendent — see LOCK-4)

@@ -402,6 +402,49 @@ Saat lapor SPT Tahunan PPh, vendor (yang dipotong) **wajib lampirkan**:
 
 ---
 
+## Addendum (Day R3, 2026-05-11) — Batam Trucking UMK Reality (WS8 LOCK)
+
+> **Anchor — Owner finance visibility gap:** Owner gak tau real cost-of-driver dan real-tax-exposure kalau pembukuan paper-only UMK + actual komisi-based pay. This section eksposes wage-pajak fiscal reconciliation gap.
+
+### UMK Kota Batam 2025 = Paper-Only Standard untuk Trucking
+
+**Fact (WS8 verified):** UMK Kota Batam 2025 secara legal = standar minimum yang berlaku semua industri termasuk trucking. **Reality on ground:** Industri trucking Batam predominantly pakai **komisi per-trip + kasbon advance** structure, BUKAN gaji bulanan flat UMK.
+
+**Mengapa gap ini ada:**
+- Sopir prefer per-trip komisi (higher upside saat ramai)
+- Owner prefer per-trip komisi (variabel cost, no fixed payroll burden saat sepi)
+- UMK paper-only di slip gaji untuk compliance Dinaker
+- Actual cashflow = komisi + kasbon flow
+
+**Tax + Accounting Implications (LOCK-2 owner finance visibility gap):**
+
+| Concern | Risk Without Discipline | Mitigation |
+|---|---|---|
+| **PPh 21 sopir** | Under-withhold kalau komisi tidak tercatat penuh | Pakai 1721-A1 monthly reporting include komisi (bukan UMK only) |
+| **BPJS Ketenagakerjaan iuran** | Under-base kalau hanya UMK | Iuran base = take-home actual (komisi+UMK), bukan UMK only |
+| **Audit risk Pemeriksaan DJP** | DJP cross-check via NLE / SP2 data — jumlah trip × tarif standar dapat dihitung. Slip gaji UMK-only = inkonsisten | Pakai struktur **gaji pokok UMK + tunjangan komisi** di slip, semuanya tercatat |
+| **Sopir BPJS Kesehatan claim** | Sopir claim sakit serius, BPJS payout based UMK-only = tidak cukup kompensasi family-business reputation hit | Iuran base actual take-home |
+| **Owner finance visibility (LOCK-2)** | Owner gak tau real driver cost per trip (kasbon offsets + komisi + UMK + BPJS) | CEO AI Assistant query: *"Real cost B-1234 trip kemarin?"* → calculate komisi + kasbon allocated + BPJS prorate |
+
+### Coretax-Ready Pembukuan Pattern untuk Trucking Family-Business
+
+**Discipline minimum untuk audit-ready:**
+
+1. Slip gaji = **UMK gaji pokok + tunjangan komisi (variable)** — semua tercatat
+2. PPh 21 monthly = withhold ALL income (UMK + komisi) bukan UMK only
+3. BPJS Ketenagakerjaan iuran base = actual take-home prior month
+4. Kasbon recorded as **piutang karyawan** di neraca, di-offset by komisi due, monthly reconciled
+5. e-Faktur Coretax sync mandatory — kalau IRN PPJK/freight forwarder, ada PER-11/PJ/2025 e-Bupot obligation
+6. **Audit trail via Asisten log** — every payroll calculation flow ke `asisten_conversation_log` table (Phase C smart-fleet-architect schema), Coretax-ready
+
+### Cross-References (LOCK-3 CEO AI Assistant integration)
+
+- Real-time payroll query via Asisten → `smart-fleet-architect/11-ceo-ai-assistant-architecture.md` (Phase C)
+- Coretax audit trail → `06-ppn-efaktur-coretax.md` + `08-internal-control-antifraud.md`
+- Tionghoa family-business cashflow context (Phase D Phase) → `10-family-business-tionghoa-context.md` (NEW)
+
+---
+
 ## L. Komunikasi ke Owner Saat Owner Mau Tax-Aggressive
 
 **Script anti tax evasion:**

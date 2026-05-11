@@ -1,5 +1,7 @@
 # Pillar 01 — System Architecture Overview
 
+> **Anchor (Day R3, 2026-05-11) — 3-Pillar Positioning + Owner Visibility Gap:** Every architecture component below maps to **AI (owner's brain extension) + IoT (sensory extension) + Mobile (nerve system)**. Every layer must answer: *which of 7 owner visibility gaps does this close?* See Addendum at file bottom for canonical 3-pillar architecture frame + CEO AI Assistant integration point (LOCK-3).
+
 ## Recommendation Decision Tree (Cepat)
 
 ```
@@ -204,4 +206,62 @@ Cloud or on-prem?
 - Driver app stack → `03-driver-mobile-app-architecture.md`
 - Mapping cost detail → `08-mapping-gps-tracking-stack.md`
 - Integration details → `09-integration-ai-ml-layer.md`
+- Anti-fraud-with-dignity workflow (NEW Phase C) → `10-anti-fraud-with-dignity.md`
+- CEO AI Assistant architecture (NEW Phase C, LOCK-3) → `11-ceo-ai-assistant-architecture.md`
 - Sister skill business context → `pakar-logistik-batam/01-domain-fundamentals.md`
+
+---
+
+## Addendum (Day R3, 2026-05-11) — 3-Pillar Architecture Frame
+
+### Pillar 1 — AI (Owner's Brain Extension)
+
+Components yang menggantikan kebutuhan owner manual tracking:
+
+| Component | Owner Gap Solved | Tech |
+|---|---|---|
+| Auto-dispatch driver↔order matching | Gap 1, 2 | Optimization (assignment problem, greedy + scoring) |
+| Fraud anomaly detection (30-day rolling outlier) | Gap 3 | Statistical (z-score per-driver baseline, ESD test) |
+| ETA prediction model | Gap 2 | Regression (XGBoost on historical trip features) |
+| OCR invoice/BL auto-classification | Backend admin time savings | OCR + Coretax e-Faktur classification |
+| Dashcam computer vision (driver fatigue) | Safety + Gap 1 | Edge inference on Android (TFLite Mediapipe) |
+| **CEO AI Assistant (LLM + RAG + tool-calling)** | **ALL 7 gaps surface via conversation** | Claude Sonnet 4.6 / Opus 4.7 + tool-calling to ops data |
+
+### Pillar 2 — IoT (Owner's Sensory Extension)
+
+Hardware yang jadi "mata + telinga" owner di lapangan:
+
+| Component | Owner Gap Solved | Hardware (locked CLAUDE.md) |
+|---|---|---|
+| ESP32-S3 BLE fuel bridge + 240-33 Ohm resistive sensor | Gap 3 | ~Rp 250-500k/vehicle |
+| UHF RFID gate (920-925 MHz EPC Gen 2 / ISO 18000-6C) | Gap 4, 5, 6, 7 | Reader IP65 (user-procured) + EPC Gen 2 tags |
+| Dual BLE gateway (driver HP + yard Raspberry Pi) | Gap 3 (auto-sync) | Pi 4 + long-range antenna + UPS Rp 800k-1.5jt MANDATORY |
+| Dashcam (Phase 2) | Safety + Gap 1 evidence | TBD Phase 2 |
+| Future: TPMS, container-seal | Phase 2+ | Deferred |
+
+**Resilience design (WS8 input):** Yard station UPS Rp 800k-1.5jt MANDATORY karena PLN brownout monthly routine di Mukakuning/Tunas/Batamindo industrial estate. Tanpa UPS = RFID gate logs hilang during brownout window = Gap 4-7 data corruption.
+
+### Pillar 3 — Mobile (Owner's Nerve System)
+
+Software flow yang surface semua data ke owner di HP:
+
+| Component | Owner Gap Solved | Stack (locked CLAUDE.md) |
+|---|---|---|
+| Driver app (PWA Phase 0 → Flutter Phase 1) | Gap 1 data capture | PWA bulan 1-3, migrate Flutter bulan 4-6 |
+| Owner dashboard di HP (glance-able, signal-over-noise) | All 7 gaps surface | Flutter or React Native, design canon → `senior-ux-architect-id` (NEW skill) |
+| Customer tracking app | Differentiator | Flutter |
+| WhatsApp Business API | CEO AI Assistant + customer comms | Wati / Maytapi / 360dialog / Mekari Qontak (decision pending — Wati most likely) |
+
+**Network defensibility (WS8 input):** Telkomsel >97% 4G coverage Batam, 5G median 88 Mbps Q1-Q2 2025. Phone-as-GPS technically defensible Phase 1. **No hardware GPS needed** (saves ~Rp 35-45jt CapEx vs 23 vehicles × hardware GPS tracker).
+
+### Competitive Architecture Differentiator vs PT Eddi Batam Logistik
+
+Eddi sudah punya TMS+IoT+big-data corporate-facing. INDUSIA differentiator architecture:
+
+1. **Phone-as-GPS** lower CapEx (~Rp 35-45jt savings) → SME-friendly
+2. **Fuel-fraud loop** (resistive sensor + 30-day rolling anomaly + owner-confirmation gate) — Eddi belum public document anti-fraud loop
+3. **Owner-direct dashboard di HP** (BUKAN corporate big-data overload) — Eddi premium-tier corporate dashboard
+4. **Crane add-on synergy** — Eddi pure trucking, IRN trucking+crane combo
+5. **CEO AI Assistant conversational layer** — UNIQUE TO INDUSIA, no Indonesia logistik competitor has this
+
+Detailed competitive analysis → `pakar-logistik-batam/06-tacit-batam-context.md` Addendum H (PT Eddi profile).

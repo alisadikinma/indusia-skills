@@ -283,3 +283,34 @@ BackgroundGeolocation.onLocation((Location location) {
 - Fuel sensor BLE pairing → `05-anti-fraud-tech-stack.md`
 - Map tile choice → `08-mapping-gps-tracking-stack.md`
 - Driver UX rationale → `pakar-logistik-batam/05-driver-control-antifraud.md`
+- Voice-note workflow + low-literacy UX (NEW skill Phase E) → `senior-ux-architect-id/02-driver-app-ux-deep.md`
+
+---
+
+## Addendum (Day R3, 2026-05-11) — Network Defensibility + Owner Gap Anchor
+
+> **Anchor — Owner Gap #1 + #2:** Driver app primary purpose = data capture yang feed owner visibility dashboard real-time. JANGAN design driver convenience first — design owner-data-feed first, driver UX is constraint optimization.
+
+### Telkomsel Network Reality (WS8 LOCK, 2026-05-11)
+
+| Metric | Value | Source |
+|---|---|---|
+| Telkomsel 4G coverage Batam | **>97%** | WS8 + Opensignal Q1-Q2 2025 |
+| 5G median Batam | **88 Mbps** | Opensignal |
+| 4G median Batam | ~35 Mbps | Opensignal |
+
+**Implication for phone-as-GPS:** Technically defensible. **No hardware GPS needed Phase 1** (saves ~Rp 35-45jt CapEx vs 23 vehicles × hardware GPS tracker). Locked CLAUDE.md.
+
+**Failure mode:** RAN congestion during peak-hour (Pelita area, Mukakuning industrial 17:00-19:00 WIB). Driver app **local buffer 5-30 min** sebelum sync — already in PWA Phase 0 spec. Confirmed Telkomsel sufficient for ETA + GPS use cases.
+
+### Indonesian Karyawan Layer UX Implications (LOCK-5)
+
+Driver demographic mix Batam = Melayu / Jawa / Batak / Minang / Bugis. Low text literacy common, **WhatsApp Voice Note literacy HIGH**. Driver app design constraints:
+
+1. **Voice-note workflow** must be 1-tap accessible (status update, issue report)
+2. **Icon + Indonesian label + voice playback** > pure text
+3. **Face-saving error messages** — "Coba lagi ya Pak" bukan "Error: invalid input"
+4. **Bahasa Indonesia primary**, Bahasa daerah Batam terms accepted (cek `pakar-logistik-batam/06-tacit-batam-context.md` glossary)
+5. **Anti-fraud-with-dignity** UX — clarification framing "Konfirmasi pengisian solar tadi pagi" BUKAN "Anda mencuri solar?" (see `10-anti-fraud-with-dignity.md` Phase C)
+
+Detailed UX spec → `senior-ux-architect-id/02-driver-app-ux-deep.md` (NEW skill Phase E).

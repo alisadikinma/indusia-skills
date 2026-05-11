@@ -229,3 +229,51 @@ Beberapa vendor yang sering disebut di transcript / pembicaraan industri:
 - Customer credit risk decision → `07-decision-frameworks.md`
 - Customer DSO economics → `04-unit-economics.md`
 - Marketing channel implementation → sister skill `smart-fleet-architect/09-integration-ai-ml-layer.md`
+
+---
+
+## Addendum (Day R3, 2026-05-11) — WS8 Infrastructure + Politics + Competitive Landscape
+
+> **Anchor — Owner Visibility Gap context:** Industry events below are BACKDROP / EVIDENCE, NEVER framed as "the pain". Pain is always owner-pov: *"Anda gak tau bahwa truk Anda lagi antri 2 jam karena BACT macet"* — bukan *"ada antrian BACT"*. Reframe industry shock → owner blind spot it creates.
+
+### G. Batam Politics — Single Point of Regulatory Contact (since Feb 2025)
+
+| Fact | Source | Implication |
+|---|---|---|
+| **Amsakar Achmad** = Walikota Batam **+ ex officio Kepala BP Batam** | UU 53/1999 + Perpres 2024 (verified WS8) | Untuk pelaku logistik FTZ → 1 single regulatory contact (consolidated authority). Tidak lagi split Pemkot ↔ BP Batam (yang historically friction). |
+| FTZ→KEK (SEZ) transition ongoing, FTZ status masih berlaku | BP Batam comms 2024-2025 | Pelaku logistik harus monitor — KEK rules berbeda customs treatment-nya |
+| **BACT crisis Dec 2025** (Batu Ampar Container Terminal congestion) | News + WS8 deep report | Backdrop: truk antri 1-2 jam routine. Owner blind spot: *Anda gak tau kapan truk Anda free, jadi gak bisa dispatch trip ke-2 hari itu* |
+| **PLN brownouts monthly routine** di industrial estate (Mukakuning, Tunas, Batamindo) | WS8 Firecrawl + community reports | Backdrop. Implication: yard station IoT gateway WAJIB UPS Rp 800k-1.5jt. Owner blind spot: *Anda gak tau RFID gate Anda mati 30 menit tadi siang* |
+| Telkomsel >97% 4G coverage Batam, 5G median 88 Mbps Q1-Q2 2025 | Opensignal + WS8 | Phone-as-GPS technically defensible. No need hardware GPS Phase 1. |
+| UMK Kota Batam 2025 = paper-only standard untuk industri trucking | WS8 (sopir actual pay vs UMK gap) | Driver compensation reality: per-trip komisi + kasbon, BUKAN gaji bulanan flat UMK. Decision frameworks (file 07) sudah cover. |
+
+### H. PT Eddi Batam Logistik — Incumbent Competitor Profile (WS8)
+
+**Profil:** Halvin Chandra (founder), HQ Batu Ampar, established Batam container trucking + forwarding + warehousing. Per WS8 ground-truth research, sudah implement **TMS + IoT + big-data layer** — bukan first-mover whitespace.
+
+**Competitive posture (verified WS8):**
+- TMS: dispatch + tracking + invoicing terintegrasi
+- IoT: GPS hardware tracker + fuel monitoring (vendor TBD, kemungkinan Teltonika/Concox tier)
+- Big-data: dashboard analytics untuk corporate customer (B2B-facing)
+- Customer base: mid-large corporate forwarder + shipping line direct
+- Market position: established, trust-pre-built, premium tier
+
+**Implications for any INDUSIA project positioning against this incumbent:**
+1. **Bukan "first with TMS"** — Eddi sudah ahead. Project differentiator should NOT claim "kami digital pertama"
+2. **Bukan compete on hardware spec** — Eddi has hardware budget. Project leverages **phone-as-GPS lower CapEx** (~Rp 35-45jt savings vs hardware GPS at fleet scale ~20-30 vehicles)
+3. **Bukan compete on corporate big-data** — Eddi sudah punya dashboard. Project brings **owner-direct dashboard di HP** (NOT corporate overload — owner glance-able UX)
+4. **Differentiate via Owner Visibility Gap solve** — fuel-fraud anti-fraud loop (Eddi belum public ada anti-fraud loop), CEO AI Assistant (Eddi belum ada conversational owner UX), **crane add-on synergy** if project includes crane line
+5. **SME-down market** — Eddi premium tier for corporate. INDUSIA-style projects target SME + family-business segment that needs owner-pov visibility, not corporate dashboard
+
+**Pitch quote pattern:** *"Eddi punya sistem corporate yang complete. `{{agency_company}}` bawa sistem yang owner langsung pakai dari HP — bukan butuh tim IT staff yang baca dashboard untuk owner."*
+
+### I. Tionghoa-Indonesian Demographic Context Batam
+
+| Fact | Source | Implication |
+|---|---|---|
+| Tionghoa-Indonesian = **6.28%** population Batam (BPS Sensus 2020) | WS8 | Minority statistik, MAYORITAS B2B logistik ownership (under-counted ownership concentration) |
+| Hokkien-Teochew dominance (vs Cantonese Jakarta, Hokkien-Hakka Medan) | WS8 + community sources | Honorific "Koh" / "Cik" / "Pak Tan" lebih natural drpd "Tante/Om" gaya Jakarta |
+| Klenteng-centered trust network + Singapore family/business ties (lintas selat) | WS8 | Trust pre-built via klenteng community references. Singapore tie = positioning angle (cross-border B2B credibility) |
+| Family-business pattern: anak/menantu = IT translator role | Generalisable + persona memo | Tech adoption gate often via family IT-literate member, BUKAN owner langsung. UX design: dua-persona (owner brief + admin/anak detail) |
+
+**Customer archetype routing implication:** SME Tionghoa Batam owner = `creative-video-director/02-archetype-routing-hooks.md` archetype. Typical honorific options "Pak Tan" / "Cik" / "Koh" / "Pak [first name]" (project-bound), calendar typically Imlek + Cap Go Meh (subset per `{{owner_religion}}`), setting kopitiam / shipyard office / klenteng accent. Full overlay → `creative-video-director/07-tionghoa-batam-overlay.md` + `senior-ux-architect-id/09-tionghoa-batam-owner-overlay.md`.

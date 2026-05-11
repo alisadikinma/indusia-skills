@@ -169,66 +169,241 @@ You: VETO dengan reasoning konkret — kenapa gimmick, alternatif yang lebih efe
 
 ---
 
-## Workflow When Invoked
+## Workflow When Invoked — 6 Phase Lock (MANDATORY ORDER)
 
-1. **Identifikasi mode dari pertanyaan user** — brief / hook / audit / format / adapt / veto.
+Architecture **WAJIB** untuk setiap creative brief request:
 
-2. **Konteks default IRN:**
-   - Client: PT Indrajaya Rezeki Nusantara, Batam
-   - Lines: trucking container forwarder + crane (planned)
-   - Customer mix: shipping line (SITC, Infinity), shipyard (Tg Uncang), manufaktur (Batamindo), EPC (Kabil O&G)
-   - Discovery doc: `d:/Projects/Indusia-AI-Logistik/01-discovery-analysis.md`
+```
+USER
+  │
+  ▼
+┌─────────────────────────────────────────────────────────┐
+│  /creative-video-director                               │
+│  ───────────────────────                                │
+│  Phase 0 — META CONTEXT       (lock project variables)  │
+│  Phase 1 — MULTI-SPECIALIST   (pilih 0..N specialist)   │
+│  Phase 2 — DOMAIN INTERVIEW   (per spec yang dipilih)   │
+│  Phase 3 — CREATIVE DECISIONS (archetype → hook → tone) │
+│  Phase 4 — SYNTHESIS + APPROVAL GATE 👈 user WAJIB OK   │
+│  Phase 5 — STRUCTURED BRIEF OUTPUT (format-agnostic)    │
+└─────────────────────────────────────────────────────────┘
+  │
+  ▼ creative brief (project-wide, format-agnostic)
+    contains: archetype, pain priority, hook angle,
+              emotional driver, brand voice, channel
+  │
+  ├─→ /video-brainstorm  (konsumsi CD brief + tanya cast/location/7-beat)
+  ├─→ /pitch-deck-brief  (konsumsi CD brief + tanya ask/traction/comparables)
+  ├─→ /linkedin-gen      (konsumsi CD brief + tanya CTA goal)
+  └─→ /carousel-gen      (konsumsi CD brief + tanya slide count/visual style)
+```
 
-3. **Load reference HANYA YANG RELEVAN:**
+**Iron Rule:** JANGAN langsung output ke Phase 5 brief tanpa approval gate Phase 4. JANGAN downstream skill (`/video-brainstorm` dst) tanya pertanyaan strategic ulang — sudah di-lock di sini.
 
-   | Pertanyaan tentang | File |
-   |---|---|
-   | Brand voice / tone / vocab / music / color | `references/01-brand-voice-doctrine.md` |
-   | Archetype routing → hook/format/tone | `references/02-archetype-creative-routing.md` |
-   | Hook spesifik per pain IRN | `references/03-hook-customization-irn.md` |
-   | Format decision (video panjang berapa, vertical/horizontal, platform) | `references/04-video-format-decision.md` |
-   | Cross-format extension (carousel, pitch, LinkedIn dari 1 video) | `references/05-cross-format-orchestration.md` |
-   | Anti-pattern veto list | `references/06-creative-vetos.md` |
+---
 
-4. **Untuk informasi DOMAIN** (pain story, customer archetype, quotable hooks, decision frameworks), **DELEGATE to** `pakar-logistik-batam`. Quote dari sana, jangan rewrite domain knowledge di sini.
+### Phase 0 — Meta Context (Project Variable Lock)
 
-5. **Output format — STRUCTURED untuk hand-off ke plugin lain:**
+Lock 8 variabel ini sebelum lanjut. Kalau user tidak sebut, tanya **sekali batch**:
 
-   ### Brief Format (untuk `/video-brainstorm` prefill)
-   ```
-   ARCHETYPE TARGET: [Pak Indra / Bu Rinda / Cici / Pak Hamdardi / Pak Eko / Pak Bambang]
-   AWARENESS LEVEL: [Unaware / Problem-Aware / Solution-Aware / Product-Aware / Most-Aware]
-   PRIMARY PAIN: [quote dari pakar-logistik-batam pillar X]
-   HOOK TYPE: [Data / Story / Question / Aspirational / Pattern Interrupt] + alasan
-   TONE: [lugas-urgent / educational-empathetic / aspirational-inspirational / etc]
-   PLATFORM PRIMARY: [TikTok / IG Reels / LinkedIn / YouTube] + duration
-   EMOTIONAL CORE: [anger / fear / hope / pride / trust]
-   VISUAL STYLE: [industrial-grit / clean-corporate / warm-human / cinematic-doc]
-   MUSIC STYLE: [silence-heavy / tense-build / warm-acoustic / orchestral / no-music-VO-only]
-   COLOR GRADE: [desaturated-cool / warm-golden / industrial-orange-teal / monochrome / neutral]
-   CTA: [softer "tonton lengkap di link" / harder "DM kami untuk demo" / etc]
-   FORMAT EXTENSION: [carousel topic, pitch slide focus, LinkedIn angle]
-   ```
+```
+Q1. Speaker (agency)?              → {{agency_name}}
+Q2. Subject (customer/audience)?   → {{client_name}}
+Q3. Industry?                      → {{client_industry}}
+Q4. Fleet/scale data?              → {{client_data}}
+Q5. Pain pillars (top 3)?          → list
+Q6. Decision-maker archetype?      → owner / admin / akuntan / PM
+Q7. Output purpose?                → promo / proposal / pitch deck / case study
+Q8. Distribution channel?          → WA / email / LinkedIn / B2B meeting / public social
+```
 
-   ### Hook Recommendation Format
-   ```
-   PAIN: [restate]
-   RECOMMENDED HOOK TYPE: [name]
-   WHY: [2-3 bullets — mechanism + audience fit]
-   SAMPLE VO (3 variasi):
-   1. ...
-   2. ...
-   3. ...
-   FORESHADOW BRIDGE: [...]
-   ALTERNATIVES considered: [type X — rejected because Y]
-   ```
+Default illustrative kalau user say "pakai default IRN": PT INDUSIA × IRN, 23 truk + 90 chassis, 9 pain pillar (lihat `references/00-orchestration-playbook.md`).
 
-   ### Veto Format
-   ```
-   FLAGGED ELEMENT: [exact item]
-   WHY VETO: [voice doctrine violation? gimmick? cliche? generic?]
-   ALTERNATIVE: [what to use instead with reasoning]
-   ```
+---
+
+### Phase 1 — Multi-Specialist Routing (pilih 0..N)
+
+Berdasarkan Phase 0 context, **decide specialist mana yang harus di-consult**. Bukan auto-call semua. Bukan auto-skip semua.
+
+| Trigger di Phase 0 | Specialist yang Dipilih |
+|---|---|
+| Industry = logistik Batam, pain = operasional sopir/admin | `pakar-logistik-batam` ✅ |
+| Output butuh mekanisme/cara kerja sistem yang harus disebutkan di brief | `smart-fleet-architect` ✅ (HIGH-LEVEL only) |
+| Output = pitch deck atau sales material dengan ROI/CapEx | `akuntan-indonesia-pro` ✅ |
+| Output = public promo (no investasi disebutkan) | `akuntan-indonesia-pro` ❌ skip |
+| Industry NON-logistik (palm oil / manufaktur / dll) | substitute domain skill yang relevan |
+
+**Decision tree detail:** `references/00-orchestration-playbook.md`.
+
+State eksplisit di chat: *"Saya akan consult: [list]. Skip: [list dengan alasan]."*
+
+---
+
+### Phase 2 — Domain Interview (Per Specialist)
+
+Untuk **setiap specialist yang dipilih di Phase 1**, invoke pakai prompt template di `references/00-orchestration-playbook.md` (section "Prompt Templates untuk Delegation").
+
+**Rules:**
+- 1 specialist = 1 invoke. JANGAN compound 3 question ke 1 skill.
+- Tanya yang **specific & answerable**. Bukan "kasih input apa saja."
+- **CACHE ke Obsidian:** sebelum invoke specialist, search `D:/Obsidian-Vault/20-Projects/{{project}}/specialist-outputs/` dulu. Kalau sudah ada finding yang cocok, reuse. Kalau invoke baru → save hasilnya ke vault setelah Phase 2 selesai.
+
+---
+
+### Phase 3 — Creative Decisions
+
+Dari Phase 2 input + reference internal (`01`-`06`), **lock 11 creative variable**:
+
+```
+ARCHETYPE TARGET     : [Pak Indra / Bu Rinda / Cici / Pak Hamdardi / Pak Eko / Pak Bambang / custom]
+AWARENESS LEVEL      : [Unaware / Problem-Aware / Solution-Aware / Product-Aware / Most-Aware]
+PRIMARY PAIN         : [1-2 kalimat dari Phase 2 pakar output]
+HOOK TYPE            : [Data / Story / Question / Aspirational / Pattern Interrupt]
+TONE                 : [lugas-urgent / educational-empathetic / aspirational / dll]
+EMOTIONAL CORE       : [anger / fear / hope / pride / trust]
+VISUAL STYLE         : [industrial-grit / clean-corporate / warm-human / cinematic-doc]
+MUSIC STYLE          : [silence-heavy / tense-build / warm-acoustic / orchestral / VO-only]
+COLOR GRADE          : [desaturated-cool / warm-golden / industrial-orange-teal / monochrome]
+BRAND VOICE GUARDRAIL: [vocab whitelist + banned list — dari file 01]
+CTA STYLE            : [soft tonton-link / medium DM-kami / hard schedule-demo]
+```
+
+Setiap decision **wajib punya RATIONALE 1 kalimat** (cite mechanism atau archetype trait, bukan "rasanya cocok").
+
+---
+
+### Phase 4 — Synthesis + Approval Gate (HARD STOP)
+
+Output preview brief (lihat schema Phase 5). **JANGAN lanjut Phase 5 sebelum user explicit confirm.**
+
+Format approval prompt:
+
+```
+✋ APPROVAL GATE — Creative Brief Preview
+
+[paste Phase 5 brief schema lengkap di sini]
+
+---
+
+❓ Konfirmasi sebelum lanjut:
+  [a] APPROVE — lanjut Phase 5 (final brief output)
+  [b] REVISE — sebut bagian mana (archetype/hook/tone/CTA/dll)
+  [c] RE-INTERVIEW — ulang Phase 2 untuk specialist [X]
+
+Tunggu jawaban user. JANGAN auto-proceed.
+```
+
+**Anti-pattern:** generate brief → langsung dispatch ke `/video-brainstorm` tanpa user OK. Ini melanggar Iron Rule.
+
+---
+
+### Phase 5 — Structured Brief Output (Format-Agnostic)
+
+Setelah approval Phase 4, output brief dalam **schema canonical** ini (downstream skill akan parse):
+
+```markdown
+# CREATIVE BRIEF — {{project_name}} — {{date}}
+
+## META
+- agency_speaker     : {{agency_name}}
+- client_subject     : {{client_name}}
+- industry           : {{client_industry}}
+- output_purpose     : {{video_purpose}}
+- distribution       : {{video_distribution}}
+
+## STRATEGIC CORE (format-agnostic — semua downstream skill pakai)
+- archetype_target   : [name + 1-line description]
+- awareness_level    : [Unaware / Problem-Aware / Solution-Aware / Product-Aware / Most-Aware]
+- pain_priority      : [1-3 ranked, dengan 1-line story per pain]
+- hook_angle         : [hook type + sample VO 3 variasi siap-pakai]
+- emotional_driver   : [anger / fear / hope / pride / trust]
+- brand_voice        : [tone + vocab whitelist + banned list]
+- channel_primary    : [TikTok / IG / LinkedIn / WA / email / B2B meeting / pitch room]
+- channel_extension  : [list secondary channel]
+
+## SOLUTION MECHANISM (kalau perlu — dari smart-fleet)
+- what_system_does   : [2-3 kalimat awam]
+- visual_hook        : [1 mekanisme paling concrete & dramatis]
+- analogy            : ["kayak Gojek" / "kayak ATM" / dll]
+- anti_claims        : [list yang JANGAN diklaim]
+
+## VISUAL & AUDIO DIRECTION
+- visual_style       : [grade pilihan]
+- music_style        : [genre + BPM range]
+- color_grade        : [pilihan]
+- vo_voice_profile   : [match archetype]
+
+## DOWNSTREAM ROUTING (apa di-dispatch ke mana)
+- primary_format     : [video-brainstorm | pitch-deck-brief | linkedin-gen | carousel-gen]
+- extension_formats  : [list — orchestrasi cross-format setelah primary jadi]
+- pre-decisions_for_downstream:
+    video-brainstorm  : [archetype, hook, tone, awareness, platform — sudah locked]
+    pitch-deck-brief  : [archetype, ask-framing, emotional-core — sudah locked]
+    linkedin-gen      : [archetype, hook, tone, channel — sudah locked]
+    carousel-gen      : [archetype, hook angle, visual style, color grade — sudah locked]
+
+## VETO CHECK (anti-pattern audit)
+- ❌ banned vocab present?              [yes/no — list kalau yes]
+- ❌ ROI/investment numbers in promo?   [yes/no — should be NO untuk public promo]
+- ❌ stock footage cliche referenced?   [yes/no]
+- ❌ generic corporate buzzword?        [yes/no]
+- ❌ over-promise capability?           [yes/no]
+```
+
+**Setelah brief Phase 5 jadi:**
+1. **WRITE ke Obsidian:** `D:/Obsidian-Vault/20-Projects/{{project}}/creative-briefs/{{deliverable}}-{{date}}.md` dengan frontmatter `tags: [creative-brief, {{project}}, {{format}}]`.
+2. **Tell user:** *"Brief saved. Lanjut dispatch ke `/[primary_format]`? Atau adapt cross-format dulu?"*
+3. **JANGAN auto-invoke downstream.** User decide kapan dispatch.
+
+---
+
+## Sub-Modes (selain full-pipeline 6-phase)
+
+Selain workflow utama 6-phase, skill juga handle 5 sub-mode (skip Phase yang tidak relevan):
+
+| Sub-Mode | Pertanyaan User | Phase yang Run |
+|---|---|---|
+| **Hook only** | "Hook mana paling masuk untuk pain X?" | Phase 0 (lite) → Phase 2 (pakar) → Phase 3 (hook saja) |
+| **Brand voice audit** | "Cek script ini — pas atau bocor?" | Phase 0 (lite) → flag mode (no Phase 1-5) |
+| **Format decision** | "Pain ini buat video atau carousel?" | Phase 0 → reference 04 lookup |
+| **Cross-format adapt** | "Video ini sudah jadi. Adapt ke carousel + LinkedIn." | input = existing brief → recompose per format |
+| **Anti-gimmick veto** | "Vendor tawar 3D motion graphics..." | Phase 0 (lite) → reference 06 lookup → veto |
+
+Sub-mode output formats:
+
+### Hook Recommendation
+```
+PAIN: [restate]
+RECOMMENDED HOOK TYPE: [name]
+WHY: [2-3 bullets — mechanism + audience fit]
+SAMPLE VO (3 variasi):
+1. ...
+2. ...
+3. ...
+FORESHADOW BRIDGE: [...]
+ALTERNATIVES considered: [type X — rejected because Y]
+```
+
+### Veto
+```
+FLAGGED ELEMENT: [exact item]
+WHY VETO: [voice doctrine violation? gimmick? cliche? generic?]
+ALTERNATIVE: [what to use instead with reasoning]
+```
+
+---
+
+## Reference Loading (HANYA yang relevan)
+
+| Pertanyaan tentang | File |
+|---|---|
+| Multi-specialist orchestration + prompt templates | `references/00-orchestration-playbook.md` |
+| Brand voice / tone / vocab / music / color | `references/01-brand-voice-doctrine.md` |
+| Archetype routing → hook/format/tone | `references/02-archetype-routing-hooks.md` |
+| High-level system explanation craft | `references/03-system-explanation-craft.md` |
+| Format decision (durasi, vertical/horizontal, platform) | `references/04-video-format-decision.md` |
+| Cross-format extension (carousel, pitch, LinkedIn) | `references/05-cross-format-orchestration.md` |
+| Anti-pattern veto list | `references/06-creative-vetos.md` |
 
 ---
 

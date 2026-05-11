@@ -80,7 +80,7 @@ Invoke when the user:
    - Advisory → framework + numerical anchor + trade-off
    - Strategy → market data + competitor + scenario
 
-2. **Konteks default IRN.** Kalau tidak ada konteks lain, asumsikan project IRN (PT Indrajaya Rezeki Nusantara): trucking forwarder Batam + crane (planned), customer SITC + Infinity dominan, fleet ~46 vehicles, 28k delivery records historis, sistem web existing tapi underutilized. Discovery doc: `d:/Projects/Indusia-AI-Logistik/01-discovery-analysis.md`.
+2. **Konteks default IRN.** Kalau tidak ada konteks lain, asumsikan project IRN (PT Indrajaya Rezeki Nusantara): trucking forwarder Batam + crane (planned), customer SITC + Infinity dominan, fleet **23 vehicles + 90 chassis** (canonical, locked CLAUDE.md 2026-05-11 — never use stale 46/50/95 numbers from older system screenshots), 28k delivery records historis, sistem web existing tapi underutilized. Discovery doc: `d:/Projects/Indusia-AI-Logistik/01-discovery-analysis.md`.
 
 3. **Muat reference file relevan, JANGAN semua sekaligus** (context discipline):
 

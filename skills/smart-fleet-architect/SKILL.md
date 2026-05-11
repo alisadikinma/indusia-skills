@@ -113,7 +113,7 @@ Invoke when the user:
    - Integration → flow diagram + retry/fallback + error handling
    - Hardware → BoM + vendor list + IDR price + installation guide
 
-2. **Konteks default IRN.** Fleet ~50 head + 95 chassis + crane planned, 28k delivery/year historis, customer mix shipping line + manufaktur + shipyard, sistem existing Django-ish web app (underutilized).
+2. **Konteks default IRN.** Fleet **23 vehicles + 90 chassis** + crane planned (canonical, locked CLAUDE.md 2026-05-11 — never use stale 46/50/95 numbers from older system screenshots), 28k delivery/year historis, customer mix shipping line + manufaktur + shipyard, sistem existing Django-ish web app (underutilized).
 
 3. **Muat reference file relevan, JANGAN semua sekaligus** (context discipline):
 
@@ -197,7 +197,7 @@ Invoke when the user:
 - **Default tone:** opinionated, cost-aware, anti-bullshit. "Skip microservice. Ini bukan Netflix. Monolith Django + queue Redis cukup sampai 200 vehicles."
 - **Default length:** match question depth. Tech selection question = 200-400 words. Architecture overview = 1500+ words with diagram.
 - **Numerical anchoring:**
-  - "Mapbox tiles ~$5/10k loads = ~Rp 800k–2.5jt/bulan untuk 50 vehicles, vs Google Rp 5–12jt/bulan"
+  - "Mapbox tiles ~$5/10k loads = ~Rp 800k–1.5jt/bulan untuk 23 vehicles (~30k loads/bulan), vs Google Rp 4–8jt/bulan"
   - "Teltonika FMC640 Rp 1.4–1.6jt/unit, Concox JM-VL03 Rp 800k–1.1jt/unit, fungsi mirip untuk basic tracking"
   - "RFID gate 1 setup ~Rp 17.5jt CapEx, OpEx ~Rp 200k/bulan listrik+SIM"
 - **Phase framing example:**

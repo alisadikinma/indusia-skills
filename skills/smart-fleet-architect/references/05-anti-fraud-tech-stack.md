@@ -505,3 +505,37 @@ This architecture has **deferred detection weakness** — kalau sopir matikan HP
 - RFID gate triplet logging (complementary) → `06-rfid-uhf-attendance-asset.md`
 - Driver psikologi root cause + sanction design → `pakar-logistik-batam/05-driver-control-antifraud.md`
 - Tax treatment kasbon + sanction → `pakar-logistik-batam/08-tax-finance-invoicing.md`
+- Anti-fraud-with-dignity workflow (Phase C, LOCK-5 cross-layer) → `10-anti-fraud-with-dignity.md` (NEW)
+- CEO AI Assistant fraud alert routing (Phase C, LOCK-3) → `11-ceo-ai-assistant-architecture.md` (NEW)
+
+---
+
+## Addendum (Day R3, 2026-05-11) — WS8 Resilience + Cross-Layer Anti-Fraud Workflow
+
+> **Anchor — Owner Gap #3:** Owner gak tau ada pencurian solar. This pillar = **IoT (resistive sensor) + AI (30-day rolling anomaly outlier)**. Owner gets full data alert; sopir gets clarification chance (24hr window) — see `10-anti-fraud-with-dignity.md` (NEW Phase C) for the full cross-layer workflow that preserves Tionghoa owner directness AND Indonesian sopir face-saving simultaneously.
+
+### Infrastructure Resilience Requirement (WS8 LOCK)
+
+| Risk | Lock | Implementation |
+|---|---|---|
+| **PLN brownouts monthly routine** di industrial estate Mukakuning / Tunas / Batamindo | Yard station UPS **Rp 800k-1.5jt MANDATORY** | UPS sebelum Raspberry Pi gateway + RFID reader. Tanpa UPS = fuel log + RFID log corruption during brownout window. Already locked in CLAUDE.md. |
+| ESP32-S3 BLE bridge offline saat brownout | Battery-backed (built-in on ESP32 board + capacitor) | OK out-of-box, low risk |
+| Driver phone BLE gateway offline saat mobil mati | Local buffer 5-30 min sync | Already in driver app spec |
+| Single-point-of-failure yard station | Dual BLE gateway pattern (driver HP + yard Pi) | Already locked CLAUDE.md |
+
+**Why monthly PLN brownout matters for anti-fraud:** Kalau yard station mati 30 menit tepat saat sopir gate-out, RFID triplet log (driver + vehicle + chassis) hilang. Fraud detection algorithm akan flag false-positive di hari brownout. UPS Rp 800k-1.5jt one-time = eliminate this attack vector + data integrity risk.
+
+### Cross-Layer Anti-Fraud Workflow Preview (full spec → file 10 Phase C)
+
+3-step workflow yang bridge Tionghoa owner directness ↔ Indonesian sopir face-saving:
+
+1. **AI detect anomaly** (fuel gap ≥10L, fuel-stop without expected progress, etc.)
+2. **Sopir gets QUIET clarification chance** — Asisten kirim WhatsApp ke sopir: *"Pak Rohim, ada catatan pengisian solar tadi pagi 50L tapi tank naik 35L. Bisa konfirmasi apakah ada drip / leak / penyusutan?"* — 24hr response window
+3. **If unresolved after 24hr OR sopir confirms intentional** → "confirmed anomaly" surfaces ke owner dashboard + Asisten owner-alert + invoice fuel hold pending owner Y/N
+
+**Why this matters (LOCK-5 cross-layer friction):**
+- Tionghoa owner direct/to-the-point on fraud = OK, dia mau full data
+- Indonesian sopir face-saving = preserve dignity, jangan langsung "diawasi seperti maling"
+- Asisten = honest broker yang give sopir chance to explain BEFORE owner sees confirmed-anomaly flag
+- Reduces false-positive friction (legitimate drip/leak/temp variation gets explained quietly, no owner-sopir confrontation needed)
+- Preserves "owner-direct visibility" while preserving "sopir dignity"

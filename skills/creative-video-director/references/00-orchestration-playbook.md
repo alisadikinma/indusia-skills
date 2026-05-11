@@ -253,3 +253,147 @@ Pertanyaan jenis ini saya redirect:
 - Format decision → `04-video-format-decision.md`
 - Cross-format orchestration → `05-cross-format-orchestration.md`
 - Veto list → `06-creative-vetos.md`
+
+---
+
+## Downstream Skill Consumption Map
+
+Setelah CD Brief Phase 5 jadi, dispatch ke 1 dari 4 downstream skill (atau lebih untuk cross-format). Setiap downstream **PRE-FILLED** dari CD brief — hanya tanya format-specific yang BELUM di-cover di brief.
+
+### `/video-brainstorm` (plugin: `ai-video-promo-engine`)
+
+**Pre-filled dari CD brief (jangan tanya ulang):**
+- archetype_target, awareness_level, pain_priority, hook_angle, emotional_driver
+- brand_voice (tone + vocab whitelist + banned)
+- channel_primary + duration target
+- visual_style, music_style, color_grade, vo_voice_profile
+
+**Format-specific yang masih ditanya:**
+- Cast multi-character (max 5) — siapa appear di video
+- Location & setting konkret (Batu Ampar / kantor IRN / kabin truk Pak Hamdardi / dll)
+- 7-beat narrative arc (Hook → Foreshadow → Agitate → Guide → Plan → Peak → Won Day)
+
+**Dispatch instruksi:**
+```
+/video-brainstorm
+
+Pre-filled brief dari /creative-video-director:
+[paste CD Brief Phase 5 — STRATEGIC CORE + VISUAL & AUDIO sections]
+
+Mohon hanya tanya:
+1. Cast multi-character (siapa appear, max 5)
+2. Location konkret per scene
+3. 7-beat narrative arc detail
+
+JANGAN tanya ulang archetype/hook/tone/awareness/platform — sudah di-lock.
+```
+
+### `/pitch-deck-brief` (plugin: `pitch-deck-designer`)
+
+**Pre-filled dari CD brief:**
+- archetype_target → audience persona deck
+- pain_priority → problem slide foundation
+- emotional_driver → narrative tension axis
+- brand_voice → deck copy voice
+- solution_mechanism + visual_hook + analogy → solution slide
+
+**Format-specific yang masih ditanya:**
+- Ask spesifik (raise amount, partnership ask, B2B contract value)
+- Traction data (revenue, customer count, MRR, retention)
+- Comparables (Logisly / Waresix / Ritase / dll — untuk pattern match slide)
+- Mode: VC fundraise / B2B adoption / hybrid
+
+**Dispatch instruksi:**
+```
+/pitch-deck-brief
+
+Pre-filled brief dari /creative-video-director:
+[paste CD Brief Phase 5 — STRATEGIC CORE + SOLUTION MECHANISM sections]
+
+Mohon hanya tanya:
+1. Ask (raise amount / partnership / contract value)
+2. Traction (revenue, customer, MRR)
+3. Comparables untuk pattern match
+4. VC / B2B / hybrid mode
+
+JANGAN tanya ulang archetype/pain/brand-voice — sudah di-lock.
+```
+
+### `/linkedin-gen` (plugin: `linkedin-post-writer`)
+
+**Pre-filled dari CD brief:**
+- archetype_target → audience tone calibration
+- hook_angle → post hook (1100-1300 char text post atau 7-10 slide carousel)
+- pain_priority → body content
+- brand_voice → vocab + sentence rhythm
+- channel_primary = LinkedIn confirmed
+
+**Format-specific yang masih ditanya:**
+- CTA goal (drive ke link bio, DM kami, comment "DEMO", schedule call)
+- Format decision: text post (1100-1300 char) ATAU carousel (7-10 slide 1080×1350)
+- Hashtag strategy (3-5 hashtags maksimal)
+- Source blog/article URL kalau ada (untuk Link-in-Comment pattern)
+
+**Dispatch instruksi:**
+```
+/linkedin-gen
+
+Pre-filled brief dari /creative-video-director:
+[paste CD Brief Phase 5 — STRATEGIC CORE section]
+
+Mohon hanya tanya:
+1. CTA goal (link / DM / comment / call)
+2. Format: text post atau carousel
+3. Hashtag pilihan (3-5)
+4. Source URL kalau ada
+
+JANGAN tanya ulang archetype/hook/tone/pain — sudah di-lock.
+```
+
+### `/carousel-gen` (plugin: `ai-image-carousel-prompt-gen`)
+
+**Pre-filled dari CD brief:**
+- archetype_target → tone visual + body copy persona
+- hook_angle → slide 1 hook
+- pain_priority → narrative arc carousel
+- brand_voice → caption tone
+- visual_style + color_grade + music_style (kalau video pendamping)
+
+**Format-specific yang masih ditanya:**
+- Slide count (5 / 7 / 10)
+- Aspect ratio (1080×1350 portrait, 1080×1080 square, 1080×1920 story)
+- Visual style spesifik per slide (cinematic / flat illustration / data viz / photo)
+- Text overlay per slide (judul + body + footer)
+
+**Dispatch instruksi:**
+```
+/carousel-gen
+
+Pre-filled brief dari /creative-video-director:
+[paste CD Brief Phase 5 — STRATEGIC CORE + VISUAL & AUDIO sections]
+
+Mohon hanya tanya:
+1. Slide count (5/7/10)
+2. Aspect ratio
+3. Visual style detail per slide
+4. Text overlay copy
+
+JANGAN tanya ulang archetype/hook/brand-voice/color — sudah di-lock.
+```
+
+---
+
+## Cross-Format Dispatch (Orchestrasi >1 Format)
+
+Kalau user minta multi-format (e.g. video + LinkedIn + carousel sekaligus), dispatch order:
+
+```
+1. PRIMARY  : /video-brainstorm (kalau video) atau /pitch-deck-brief (kalau pitch)
+              → karena format ini paling rich, set tone untuk yang lain
+2. SECONDARY: /linkedin-gen + /carousel-gen
+              → consume CD brief PLUS extracted moments dari primary output
+3. AUDIT    : /creative-video-director sub-mode "brand voice audit"
+              → cek consistency cross-format sebelum publish
+```
+
+JANGAN parallel dispatch tanpa primary jadi dulu. Voice consistency butuh anchor.

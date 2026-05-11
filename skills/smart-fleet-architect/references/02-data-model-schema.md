@@ -550,3 +550,168 @@ Setiap entity utama punya `deleted_at TIMESTAMPTZ`. Default queries pakai `WHERE
 - Sensor data ingestion → `05-anti-fraud-tech-stack.md` + `06-rfid-uhf-attendance-asset.md`
 - Yard slot allocation logic → `07-container-yard-management.md`
 - Integration external API persistence → `09-integration-ai-ml-layer.md`
+- CEO AI Assistant data flow (LOCK-3) → `11-ceo-ai-assistant-architecture.md` Section 4
+- Anti-fraud-with-dignity workflow tables (LOCK-5) → `10-anti-fraud-with-dignity.md`
+
+---
+
+## Addendum (Day R3, 2026-05-11) — CEO AI Assistant Schema Additions (LOCK-3)
+
+> **Anchor — LOCK-3 flagship:** 3 new tables required Phase 1 untuk CEO AI Assistant. Audit-defensible, Coretax-compliance-ready, partitionable for >100k turn growth.
+
+### Table 1 — `asisten_conversation_log` (chat + tool-use audit trail)
+
+```sql
+CREATE TABLE asisten_conversation_log (
+  id BIGSERIAL PRIMARY KEY,
+  owner_id INTEGER NOT NULL REFERENCES owner(id),
+  session_id UUID NOT NULL,
+  turn_index INTEGER NOT NULL,
+  role TEXT NOT NULL CHECK (role IN ('user','asisten','tool','system')),
+  content TEXT NOT NULL,
+  tool_name TEXT,
+  tool_input JSONB,
+  tool_output JSONB,
+  action_taken TEXT,
+  permission_check TEXT,
+  override_reason TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_asisten_log_owner_session ON asisten_conversation_log (owner_id, session_id, turn_index);
+CREATE INDEX idx_asisten_log_action ON asisten_conversation_log (action_taken) WHERE action_taken IS NOT NULL;
+CREATE INDEX idx_asisten_log_created_at ON asisten_conversation_log (created_at);
+
+-- Partitioning recommended once table exceeds 1M rows (monthly partition by created_at)
+```
+
+**Columns explained:**
+- `role`: who produced the turn — user (owner asking), asisten (LLM response), tool (tool-call output), system (initial prompt / context injection)
+- `tool_name`: e.g., `get_fuel_anomaly_alerts`, `hold_invoice` — see `11-ceo-ai-assistant-architecture.md` Section 3.1
+- `permission_check`: `owner-confirmed:Y`, `owner-confirmed:N`, `auto-approved:read-only`, `auto-blocked:scope-violation`
+- `override_reason`: populated when owner uses force-confirm-fraud override path (LOCK-5)
+
+**Compliance:** Coretax audit-ready. Every `action_taken` that affects financial records (hold_invoice, etc.) has full trace.
+
+### Table 2 — `asisten_alert_queue` (proactive mode + delivery tracking)
+
+```sql
+CREATE TABLE asisten_alert_queue (
+  id BIGSERIAL PRIMARY KEY,
+  owner_id INTEGER NOT NULL REFERENCES owner(id),
+  alert_type TEXT NOT NULL,
+  severity TEXT NOT NULL CHECK (severity IN ('info','warn','urgent')),
+  payload JSONB NOT NULL,
+  sent_at TIMESTAMPTZ,
+  delivered_at TIMESTAMPTZ,
+  read_at TIMESTAMPTZ,
+  owner_action TEXT,
+  responded_at TIMESTAMPTZ,
+  related_entity_type TEXT,
+  related_entity_id BIGINT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_asisten_alert_owner_severity ON asisten_alert_queue (owner_id, severity, created_at DESC);
+CREATE INDEX idx_asisten_alert_unactioned ON asisten_alert_queue (owner_id, created_at) WHERE owner_action IS NULL;
+CREATE INDEX idx_asisten_alert_related ON asisten_alert_queue (related_entity_type, related_entity_id);
+```
+
+**`alert_type` enum (Phase 1):**
+- `fuel_anomaly` — links to `fuel_anomaly_alert` (anti-fraud)
+- `attendance_late` — links to `attendance_rfid_log`
+- `customer_urgent` — links to `customer_communication`
+- `coretax_sync_fail` — links to `coretax_sync_log`
+- `calendar_reminder` — religious calendar (Imlek, Eid, etc.)
+- `eta_deviation` — links to `delivery` with predicted vs actual gap >threshold
+
+**`owner_action` enum:** `Y`, `N`, `snoozed`, `escalated`, `dismissed` — null if no response yet
+
+### Table 3 — `asisten_owner_preference` (memory layer)
+
+```sql
+CREATE TABLE asisten_owner_preference (
+  owner_id INTEGER NOT NULL REFERENCES owner(id),
+  preference_key TEXT NOT NULL,
+  preference_value JSONB NOT NULL,
+  source TEXT NOT NULL CHECK (source IN ('persona_validation','learned','owner_explicit')),
+  last_updated TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (owner_id, preference_key)
+);
+```
+
+**Seed `preference_key` set (Phase 1, from persona validation interview Q1-15):**
+
+| Key | Value Shape | Default | Seeded From |
+|---|---|---|---|
+| `greeting` | `{"honorific": "<bound from `{{owner_honorific}}`>", "language": "<bound from `{{owner_language_secondary}}`>"}` | `{"honorific": "Bapak", "language": "id"}` | project-variables |
+| `unit_volume` | `"liter"` or `"galon"` | `"liter"` | Q11 |
+| `unit_distance` | `"km"` or `"mil"` | `"km"` | Q11 |
+| `currency_format` | `{"separator": ".", "decimal": ","}` (Indonesian standard) | Indonesian default | Q11 |
+| `working_hours_start` | `"06:00"` (string HH:MM) | `"08:00"` | Q8 |
+| `working_hours_end` | `"19:00"` | `"18:00"` | Q8 |
+| `quiet_hours` | `[{"start":"22:00","end":"06:00"}]` (array of windows) | overnight default | Q8 |
+| `religious_calendar` | `["imlek","cap_go_meh","qingming","vesak"]` | empty array | Q9, Q3 |
+| `language_secondary` | `"hokkien"` or `"mandarin"` or null | null | Q5 |
+| `response_length` | `"brief"` or `"detailed"` | `"brief"` | Q12 |
+| `proactive_alert_threshold` | `{"fuel_gap_liters": 10, "attendance_late_min": 30}` | defaults from architecture | learned over time |
+
+**Why JSONB for `preference_value`:** future-proof — new preference keys without schema migration.
+
+### Cross-Table Relationships
+
+```
+owner (existing)
+  ├── 1:N asisten_conversation_log (audit trail)
+  ├── 1:N asisten_alert_queue (proactive mode)
+  └── 1:N asisten_owner_preference (memory layer)
+
+asisten_alert_queue
+  └── N:1 → related_entity (polymorphic: fuel_anomaly_alert / attendance_rfid_log / customer_communication / delivery / etc.)
+
+asisten_conversation_log
+  └── (logical link via tool_name + tool_input/output to existing ops tables — no FK to preserve LLM flexibility)
+```
+
+### Retention + Partitioning
+
+| Table | Retention | Partition Strategy |
+|---|---|---|
+| `asisten_conversation_log` | 7 years (Coretax audit compliance) | Monthly partition by `created_at` once >1M rows |
+| `asisten_alert_queue` | 2 years | Monthly partition once >500k rows |
+| `asisten_owner_preference` | Indefinite (small table, <100 rows) | No partition needed |
+
+### Security + Access
+
+- All 3 tables: row-level security (RLS) by `owner_id` — owner sees only own data
+- Phase 2 admin/accountant sub-account: scope-filtered access via Postgres RLS policy
+- Backup: daily incremental + weekly full to off-site (Jakarta cloud)
+- Encryption at rest: PostgreSQL TDE or filesystem-level
+
+### Phase 2 Schema Extensions (NOT in Phase 1)
+
+```sql
+-- Voice call session tracking (Phase 2)
+CREATE TABLE asisten_voice_session (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_log_session_id UUID NOT NULL,
+  twilio_call_sid TEXT,
+  whisper_stt_duration_ms INTEGER,
+  tts_voice_id TEXT,
+  total_duration_sec INTEGER,
+  cost_idr NUMERIC(12,2),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Sub-account scope (admin/accountant Phase 2)
+CREATE TABLE asisten_subaccount_scope (
+  id BIGSERIAL PRIMARY KEY,
+  owner_id INTEGER NOT NULL REFERENCES owner(id),
+  subaccount_user_id INTEGER NOT NULL REFERENCES user_account(id),
+  scope_tools TEXT[] NOT NULL,  -- whitelist of tool_name accessible
+  scope_entities JSONB,         -- e.g., {"vehicle_ids": [1,2,5], "customer_ids": "all"}
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+```
+
+Defer Phase 2 table creation until Phase 1 stable + scope requirements validated via user testing.

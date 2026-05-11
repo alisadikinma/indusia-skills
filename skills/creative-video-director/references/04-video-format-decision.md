@@ -374,3 +374,65 @@ Hanya buat kalau diminta. Bukan default.
 - Brand voice + color/music doctrine → `01-brand-voice-doctrine.md`
 - Cross-format adaptation (carousel + LinkedIn + pitch slide) → `05-cross-format-orchestration.md`
 - Anti-pattern veto detail → `06-creative-vetos.md`
+- Tionghoa Batam casting + setting overlay (Phase D, LOCK-4) → `07-tionghoa-batam-overlay.md` (NEW)
+- **5-beat narrative scaffold canonical** (Phase F, WS6) → `08-narrative-retention-framework.md` (NEW — beat-by-beat operational rules + veto checklist)
+
+---
+
+## Addendum (Day R3, 2026-05-11) — 5-Beat Narrative Framework + Asisten Scene Mandate
+
+> **Anchor — CEO AI Assistant flagship feature pattern:** Setiap video promo for a client with `{{client_has_asisten_feature}}` = true WAJIB demo `{{asisten_name}}` dalam ≥1 scene. Format: WhatsApp screen rendering on-phone, owner ngomong/tanya/baca jawaban. Bukan optional, bukan B-roll — central scene di beat 3 (BODY) atau beat 4 (PEAK).
+
+### 5-Beat Narrative Framework (WS6 — replaces older 7-beat)
+
+| Beat | Position (% runtime) | Function | Owner Visibility Gap Anchor |
+|---|---|---|---|
+| **1. HOOK** | 0-10% | Curiosity-gap opens ("Anda tahu...?"), specific data, owner-pov | Pick 1 of 7 gaps as hook material |
+| **2. FORESHADOW** | 10-25% | Hint solusi exists, drip-feed Asisten/dashboard reveal — don't dump payoff yet | Same gap, "Pak Indra punya cara baru lihat ini..." |
+| **3. BODY** | 25-70% | Show mechanism — Asisten WhatsApp scene, dashboard glance, fuel-fraud detection sequence, RFID gate triplet | Triangulate to 3-pillar (AI/IoT/Mobile) |
+| **4. PEAK** | 70-85% | Emotional payoff — Pak Indra ngomong *"Saya bisa lihat semua dari HP saya"* atau equivalent vindication moment | All 7 gaps resolved via single Asisten interaction |
+| **5. CTA** | 85-100% | Soft for B2B (consult / DM / WA), B2C harder | DM PT INDUSIA, schedule discovery call |
+
+**Anti-deflation rule:** Peak placement at 70-85% — kalau peak terlalu awal (50%), viewer drop-off; kalau terlalu akhir (95%), CTA gak ada room.
+
+### Beat-to-Runtime Mapping per Format
+
+| Format | Total Runtime | HOOK | FORESHADOW | BODY | PEAK | CTA |
+|---|---|---|---|---|---|---|
+| Vertical 60s (TikTok/IG Reels) | 60s | 0-6s | 6-15s | 15-42s | 42-51s | 51-60s |
+| Horizontal 90-120s (LinkedIn) | 120s | 0-12s | 12-30s | 30-84s | 84-102s | 102-120s |
+| Long-form B2B 3-4min | 240s | 0-24s | 24-60s | 60-168s | 168-204s | 204-240s |
+| Pitch deck video clip 60-90s | 75s | 0-7s | 7-19s | 19-53s | 53-64s | 64-75s |
+
+### CTA Register Calibration per Audience (WS6 + WS1 input)
+
+| Audience | CTA Tone | Example |
+|---|---|---|
+| Pak Indra owner Tionghoa (B2B SME) | **Soft, consultative** | *"DM kami untuk demo Asisten — gratis, 30 menit."* |
+| Procurement / IT manager (B2B corporate) | **Procurement-appropriate** | *"Request proposal di [URL]"* |
+| Sopir / karyawan (recruitment video) | **Direct + face-saving** | *"Daftar di [link], kami panggil interview"* |
+| Customer (tracking-app promo) | **Friction-low** | *"Scan QR, dapatkan link tracking"* |
+
+**Anti-CTA:** Hard-sell ("BELI SEKARANG", "JANGAN SAMPAI KETINGGALAN") gagal di Tionghoa Batam practical-skeptic register. Default soft consultative.
+
+### Mandatory Asisten Demo Scene Spec (LOCK-3)
+
+In every video promo for a client with `{{client_has_asisten_feature}}` = true, ≥1 scene MUST show:
+
+1. **Phone screen rendering** — actual WhatsApp UI dengan chat ke "Asisten Pak Indra" (or final-naming)
+2. **Real query example** — pick 1 from `pakar-logistik-batam/09-product-feature-map.md` Asisten example library (e.g., *"Solar hari ini gimana?"*)
+3. **Real response example** — Asisten reply dengan specific data (e.g., *"5 truk aktif. B-5678 ada anomali 15L gap..."*)
+4. **Pak Indra reaction shot** — owner reads reply, makes decision face (vindication / surprise / quiet confidence)
+5. **Subtitle Bahasa Indonesia + EN optional** — readable on mute (most LinkedIn viewers mute)
+
+**Format constraint:** Asisten scene runtime 8-15 seconds in BODY beat, OR scene as PEAK (then payoff = the message itself).
+
+### Direct Address Rule (WS1-REDO + LOCK-2)
+
+Audience direct addressed as REAL person, not abstract "para pengusaha":
+- ✅ *"Anda, Pak Indra"*
+- ✅ *"23 truk Anda. 90 chassis Anda. 5 sopir Anda kerja sekarang."*
+- ❌ *"Para pengusaha trucking di Batam..."*
+- ❌ *"Banyak owner mengalami..."*
+
+This is Owner-Visibility-Gap framing applied to narrative pronoun — specific, second-person, accountable.

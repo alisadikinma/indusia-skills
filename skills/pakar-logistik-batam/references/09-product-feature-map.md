@@ -1,5 +1,7 @@
 # Pillar 09 — Product Feature Map: Pain → Feature MoSCoW + ROI
 
+> **Anchor (Day R3, 2026-05-11) — Owner Visibility Gap:** Pain klien = **owner blind to ops** (7 specific "gak tau"), BUKAN industry inefficiency. Setiap feature di file ini WAJIB map ke ≥1 dari 7 gap + ≥1 dari 3 pillar (AI/IoT/Mobile). See Owner Pain → Pillar Mapping section di bawah, dan CEO AI Assistant sebagai unifying feature spine.
+
 ## Tujuan File Ini
 
 Menjadi **single source-of-truth** untuk product/feature roadmap. Setiap fitur di sistem IRN (atau produk SaaS yang akan dijual ke pasar Batam logistik) di-map ke:
@@ -204,5 +206,78 @@ Month 3 — Anti-Fraud + Pilot Sensor:
 ## Cross-References
 
 - Pain detail per pillar → `01-domain-fundamentals.md` sampai `08-tax-finance-invoicing.md`
-- Tech implementation per fitur → sister skill `smart-fleet-architect/01-09`
+- Tech implementation per fitur → sister skill `smart-fleet-architect/01-09` + `11-ceo-ai-assistant-architecture.md` (NEW Phase C)
 - ROI calculation methodology → `04-unit-economics.md`
+
+---
+
+## Addendum — Owner Visibility Gap × 3-Pillar Feature Matrix (Generic Pattern)
+
+> **Purpose:** Generic feature-prioritization pattern. Project binds specific owner-pain inventory via `project-variables.md`. Batam-industry market data + competitor profile are domain knowledge applicable to any Batam-logistik client.
+
+### Owner Pain → Pillar Mapping (Pattern Template)
+
+**Pattern principle:** SME fleet/logistik owners are typically **blind to operations** — they rely on phoning drivers one-by-one or waiting for admin recap. The 3-pillar solution (AI + IoT + Mobile) closes specific visibility gaps. Each project enumerates its own specific gap inventory; the canonical pattern below shows how gaps map to pillars + features.
+
+**Canonical 7-gap inventory (typical Batam-logistik SME, project may adjust):**
+
+| # | Typical Owner Pain ("gak tau...") | Pillar(s) | Feature Manifestation Pattern |
+|---|---|---|---|
+| 1 | Kondisi lapangan real-time | **Mobile + IoT** | Live dashboard di HP owner + GPS via driver phone |
+| 2 | ETA ideal vs aktual driver | **AI + Mobile** | ETA prediction model + timeline view |
+| 3 | Pencurian solar oleh driver | **IoT + AI** | Resistive fuel sensor + 30-day rolling anomaly outlier (anti-fraud-with-dignity loop) |
+| 4 | Attendance karyawan (datang/pulang jam berapa) | **IoT + Mobile** | RFID gate logging triplet + HR dashboard |
+| 5 | Posisi container di jalan | **IoT + Mobile** | RFID + GPS + asset map |
+| 6 | Posisi chassis | **IoT + AI** | UHF RFID gate scan + location inference |
+| 7 | Posisi container di gudang | **IoT + Mobile** | CYMS RFID grid + yard heatmap |
+
+Project may add/remove gaps based on specific owner interview. Each gap MUST map to ≥1 pillar + ≥1 feature.
+
+### Unifying Feature Pattern: CEO AI Assistant
+
+All identified gaps can surface via **single conversational interface** (`{{asisten_name}}`) — accessible WhatsApp chat + voice call. Example query patterns:
+
+- *"Truk `{{vehicle_id}}` sudah sampai mana?"* → Field-condition + container-location gaps (Mobile + IoT)
+- *"Solar hari ini gimana?"* → Fuel-fraud gap (IoT + AI anomaly surfacing)
+- *"Hari ini ada yang telat?"* → Attendance gap (IoT + AI summarize)
+- *"Container `{{container_id}}` di mana?"* → Container-location gaps (IoT RFID + AI location inference)
+
+Tech architecture template → sister skill `smart-fleet-architect/11-ceo-ai-assistant-architecture.md`.
+
+**Critical product principle:** Asisten = single feature that is **bukan tambahan, tapi spine** — bukan *"owner harus belajar 18 fitur"*, tapi *"owner bisa tanya Asisten kapan saja"*. Frame for pitch: *"Bukan beli sistem rumit yang Bapak harus belajar. Tapi punya asisten yang Bapak bisa tanya."*
+
+### Market Sizing — Batam Logistik Industry (Domain Knowledge)
+
+This data is general Batam-industry knowledge from WS9 ground-truth research, applicable to any Batam-logistik client's TAM analysis:
+
+| Metric | Value | Source |
+|---|---|---|
+| Batam container throughput 2025 | **797k TEUs (+18% YoY)** | WS9 deep report — BP Batam + shipping line aggregates |
+| Batu Ampar growth 2025 | **+24% YoY** (fastest in Indonesia) | WS9 |
+| Trucking demand Batam 2025 → 2027 | **978k moves/year → 1.44M** (+47%) | WS9 derived from TEU × multimodal ratio |
+| Crane rental TAM Batam | **Rp 400-700 M/year** | WS9 derived from shipyard + industrial estate capex pulse |
+| Digital crane booking platform Indonesia | **ZERO** (whitespace) | WS9 competitive scan |
+
+**Project-specific ROI projection** (revenue uplift / margin uplift / payback period numbers) is NOT generic domain knowledge — bind in each project's `project-variables.md`.
+
+### Competitive Whitespace vs Incumbent (PT Eddi Batam Logistik as Batam-Industry Reference)
+
+PT Eddi Batam Logistik (Halvin Chandra, Batu Ampar) = incumbent Batam-logistik SME competitor with established TMS + IoT + big-data layer. Public-documented capability gaps that an INDUSIA project can target:
+
+- (a) Phone-as-GPS lower CapEx framing (incumbent uses hardware GPS)
+- (b) Fuel-fraud anti-fraud loop public-documented (none from incumbent)
+- (c) Owner-direct dashboard di HP (incumbent uses corporate big-data dashboard)
+- (d) Crane add-on synergy (incumbent is pure trucking)
+- (e) CEO AI Assistant conversational layer (UNIQUE — no Indonesia logistik competitor has this)
+
+Use this competitive analysis as starting reference for any Batam-logistik client positioning. Specific framings (e.g., naming comparisons with own client fleet size) bind via `project-variables.md`.
+
+### Pitch Hook Pattern
+
+```
+"`{{competitor_incumbent}}` punya [X] truk dengan sistem corporate. 
+`{{client_company_short}}` punya `{{client_fleet_size}}` truk dengan sistem yang 
+owner langsung pakai dari HP — dan ada Asisten yang tahu kondisi lapangan 24/7."
+```
+
+Project binds `{{competitor_incumbent}}`, `{{client_company_short}}`, `{{client_fleet_size}}` via `project-variables.md`.
