@@ -11,3 +11,6 @@ __pycache__/
 .env.local
 *.bak
 *.swp
+
+# graphify generated knowledge graph (regenerate with: graphify update .)
+graphify-out/

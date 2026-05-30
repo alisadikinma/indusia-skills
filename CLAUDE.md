@@ -38,6 +38,7 @@ Cek `skills/` folder + masing-masing `SKILL.md` untuk full description. High-lev
 - `smart-fleet-architect` — hardware/architecture design (fuel sensor, RFID, ESP32)
 - `akuntan-indonesia-pro` — Indonesian accounting (PPh 23, e-faktur, dashboard angka)
 - `senior-ux-architect-id` — UX screens (driver app, owner dashboard, Asisten chat)
+- `ai-business-architect` — maverick AI business-model & business-development strategist (out-of-the-box monetization, pricing, incumbent collaboration: JV/BOT/white-label/gainshare)
 
 ## Repository
 
